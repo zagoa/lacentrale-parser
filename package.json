@@ -1,0 +1,14 @@
+{
+  "name": "script",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Arnaud Zago",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "csv-write-stream": "^2.0.0",
+    "http": "^0.0.0",
+    "node-fetch": "^2.1.2",
+    "request": "^2.87.0"
+  }
+}
