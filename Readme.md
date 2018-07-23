@@ -28,7 +28,7 @@ Then open a terminal and type : `npm install` to install the dependencies.
 
 Then you can run the programme `node index.js`.
 
-And juste follow the instructions in the terminal
+And juste follow the instructions in the terminal.
 
 ___
 ## How to 
