@@ -17,9 +17,11 @@ const carArray = [
 
 let page = 1;
 //default config
-let priceMax = 15000;
+let priceMax = 18000;
 let yearMin = 2016;
 let mileageMax = 50000;
+let energies = 'ess,hyb';
+let regions = "FR-PAC,FR-NAQ"
 
 doRequest = (url) => {
     return new Promise(function (resolve, reject) {
@@ -34,7 +36,7 @@ doRequest = (url) => {
   }
 
 buildURL = (brand, model) => {
-    let res =  encodeURI(`https://www.lacentrale.fr/listing?makesModelsCommercialNames=${brand}$$${model}&priceMax=${priceMax}&mileageMax=${mileageMax}&yearMin=${yearMin}&page=${page}`);
+    let res =  encodeURI(`https://www.lacentrale.fr/listing?makesModelsCommercialNames=${brand}$$${model}&priceMax=${priceMax}&mileageMax=${mileageMax}&yearMin=${yearMin}&page=${page}&energies=${energies}&regions=${regions}`);
     return res.replace('$$', encodeURIComponent(':'));
 
     
@@ -192,8 +194,8 @@ main = async () => {
         page = 1;
         let maxPage = 1;
         for(let i = 1; i <= maxPage; i++){
-            let URL =  buildURL(elem.brand, elem.model); 
-            let body = await doRequest(URL);
+            let URL =  buildURL(elem.brand, elem.model);
+            let body = await doRequest(URL).catch(err => console.error("### Lacentrale website structure has changed ###"));
             maxPage = parseNumPage(body);
             resArray.push({brand: elem.brand, model : elem.model, cars : parseHTML(body,elem.brand, elem.model)});
             page += 1;
