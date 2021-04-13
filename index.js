@@ -43,8 +43,6 @@ doRequest = (url) => {
 buildURL = (car) => {
     let res = encodeURI(`https://www.lacentrale.fr/listing?makesModelsCommercialNames=${car.brand}$$${car.model}&priceMax=${car.priceMax}&mileageMax=${car.mileageMax}&yearMin=${car.yearMin}&page=${car.page}&energies=${car.energies}&regions=${car.regions}&powerDINMin=${car.powerDINMin}`);
     return res.replace('$$', encodeURIComponent(':'));
-
-
 };
 
 
@@ -127,6 +125,8 @@ main = async () => {
         let maxPage = 1;
         for (let i = 1; i <= maxPage; i++) {
             let URL = buildURL(elem);
+            console.log('### SEARCHING ###')
+            console.log('URL searched : ' + URL);
             let body = await doRequest(URL).catch(err => console.error("### Lacentrale website structure has changed ###"));
             maxPage = parseNumPage(body);
             resArray.push({brand: elem.brand, model: elem.model, cars: parseHTML(body, elem.brand, elem.model)});
